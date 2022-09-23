@@ -25,8 +25,8 @@ public class Pokemon{
         currentSkill = null;
     }
 
-    public void takeDamage(int damage){
-        if ((this.currentHp-damage) < 0) {
+    public void takeDamage(int damage){     //Lowers the pokemons hp by the value of damage, if the damage exceeds the currentHp then currentHp is set to 0
+        if ((this.currentHp-damage) < 0) { 
             this.currentHp = 0;
         }
 
@@ -45,17 +45,29 @@ public class Pokemon{
 
     }
 
-    public void recoverEp(){
+    public void recoverEp(){    //Recovers ep at the ammount of the variable ammountEpRecovered
         if(currentHp != 0){
             int ammountEpRecovered = 25;
             this.ep = ammountEpRecovered;
         }
     }
 
-    public void spendEp(int epSpent){
+    public void spendEp(int epSpent){   //Spending ep
         if((this.ep - epSpent) => 0) {
             this.ep -= epSpent;
         }
+    }
+    
+    public String getCurrentSkillName(){
+        return currentSkill.getName();
+    }
+
+    public String getCurrentSkillAp(){
+        return currentSkill.getAp();
+    }
+
+    public String getCurrentSkillEc(){
+        return currentSkill.getEc();
     }
 
     public String toString(){   //Makes it so you can print the information in a Pokemon object
@@ -67,7 +79,7 @@ public class Pokemon{
         }
 
         else{
-            returnString = this.name + " (" + this.type + "). Knows " + currentSkill.getName() + " - AP: " + currentSkill.getAp() + " EP: " + currentSkill.getEc();
+            returnString = this.name + " (" + this.type + "). Knows " + currentSkill.getName() + " - AP: " + currentSkill.getAp() + " EC: " + currentSkill.getEc();
             return returnString;
         }
 
