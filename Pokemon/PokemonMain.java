@@ -4,7 +4,8 @@ public class PokemonMain{
 
         System.out.println("Hello pokemonGuyMan! I like Pokemon");
         
-        Pokemon Hej = new Pokemon("Squirtle", 100, "Fire");
+        Pokemon Hej = new Pokemon("Charmander", 100, "Fire");
+        Hej.learnSkill("Fireball", 10, 10);
 
         System.out.println(Hej);
 
