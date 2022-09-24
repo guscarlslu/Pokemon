@@ -9,6 +9,7 @@ public class Utility {
 
         while(menuoption != 4){
 
+            System.out.println("----------------------------------");
             System.out.println("1. Create a Pokemon");
             System.out.println("2. View Pokemon");
             System.out.println("3. Battle");
@@ -19,7 +20,7 @@ public class Utility {
 
             if(menuoption == 1){pokemon = createPokemon(pokemon, input);}
 
-            else if(menuoption == 2){viewPokemon(pokemon);}
+            else if(menuoption == 2){editPokemon(pokemon, input);}
 
             else if(menuoption == 3){}
 
@@ -40,14 +41,17 @@ public class Utility {
         int pokemonTypeInt = -1;
         int skillOption;
 
+        System.out.println("----------------------------------");
         System.out.println("Type in the name of the pokemon:");
         pokemonName = input.nextLine();
 
+        System.out.println("----------------------------------");
         System.out.println("Type in the max hp of the pokemon:");
         pokemonMaxHp = input.nextInt();
         input.nextLine();
 
         while(pokemonTypeInt < 0 || pokemonTypeInt > 4){
+            System.out.println("----------------------------------");
             System.out.println("What type do you want your pokemon to be?");
             System.out.println("1. Fire");
             System.out.println("2. Water");
@@ -64,6 +68,7 @@ public class Utility {
 
         pokemon = arrayAdd(pokemon, new Pokemon(pokemonName, pokemonMaxHp, pokemonType));
 
+        System.out.println("----------------------------------");
         System.out.println("Do you want your pokemon to know a skill?");
         System.out.println("1. Yes");
         System.out.println("2. No");
@@ -78,10 +83,43 @@ public class Utility {
     }
 
 
-    public static void viewPokemon(Pokemon[] pokemon){      //Displays all created Pokemon
+    public static void editPokemon(Pokemon[] pokemon, Scanner input){      //Displays all created Pokemon and allow you to edit the skills
+        int option;
+        int optionSubMenu;
+
+        System.out.println("----------------------------------");
+        System.out.println("0. Back");
         for(int i = 0; i < pokemon.length; i++){
-            System.out.println(pokemon[i]);
+            System.out.println((i+1) + ". " + pokemon[i]);
         }
+
+        option = input.nextInt();
+        input.nextLine();
+
+        if(option <= pokemon.length && option > 0){
+            System.out.println("----------------------------------");
+            System.out.println(pokemon[(option-1)]);
+
+            System.out.println("----------------------------------");
+            System.out.println("0. Exit to menu");
+            
+            if(pokemon[option-1].assertSkillNull()){System.out.println("1. Learn skill");}
+
+            else{System.out.println("1. Forget skill");}
+
+            optionSubMenu = input.nextInt();
+            input.nextLine();
+
+            if(optionSubMenu == 1 && pokemon[option-1].assertSkillNull()){
+                teachPokemonSkill(pokemon[option-1], input);
+            }
+            
+            else if(optionSubMenu == 1 && !pokemon[option-1].assertSkillNull()){
+                pokemon[option-1].forgetSkill();
+            }
+         }
+
+
     }
 
     
@@ -90,13 +128,16 @@ public class Utility {
         int ap;
         int ec;
 
+        System.out.println("----------------------------------");
         System.out.println("Type the name of your skill:");
         skillName = input.nextLine();
 
+        System.out.println("----------------------------------");
         System.out.println("Type in the attack power of your skill:");
         ap = input.nextInt();
         input.nextLine();
 
+        System.out.println("----------------------------------");
         System.out.println("Type in the energy cost of your skill:");
         ec = input.nextInt();
         input.nextLine();
@@ -110,7 +151,7 @@ public class Utility {
         Pokemon[] pokemonTemp = new Pokemon[(pokemon.length+1)];
 
         for(int i = 0; i < pokemonTemp.length; i++){
-            
+
             if(i < pokemon.length){pokemonTemp[i] = pokemon[i];}
 
             else{pokemonTemp[i] = pokemonToAdd;}
@@ -122,4 +163,5 @@ public class Utility {
 
     }
 
+    
 }
