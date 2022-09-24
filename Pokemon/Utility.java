@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Utility {
     
 
-    public static void menu(Scanner input){
+    public static void menu(Scanner input){         //Main menu of the Pokemon game
         int menuoption = 0;
-        Pokemon[] pokemon = null;
+        Pokemon[] pokemon = new Pokemon[0];
 
         while(menuoption != 4){
 
@@ -17,7 +17,7 @@ public class Utility {
             menuoption = input.nextInt();
             input.nextLine();
 
-            if(menuoption == 1){pokemon = createPokemon(input);}
+            if(menuoption == 1){pokemon = createPokemon(pokemon, input);}
 
             else if(menuoption == 2){viewPokemon(pokemon);}
 
@@ -33,8 +33,7 @@ public class Utility {
     }
 
 
-    public static Pokemon[] createPokemon(Scanner input){
-        Pokemon[] pokemon = new Pokemon[1];
+    public static Pokemon[] createPokemon(Pokemon[] pokemon, Scanner input){       //Creates a pokemon with user input, with creating a skill being optional
         String pokemonName;
         int pokemonMaxHp;
         String pokemonType = null;
@@ -63,7 +62,7 @@ public class Utility {
             else{System.out.println("Error - Invalid input");}
         }
 
-        pokemon[0] = new Pokemon(pokemonName, pokemonMaxHp, pokemonType);
+        pokemon = arrayAdd(pokemon, new Pokemon(pokemonName, pokemonMaxHp, pokemonType));
 
         System.out.println("Do you want your pokemon to know a skill?");
         System.out.println("1. Yes");
@@ -72,19 +71,21 @@ public class Utility {
         input.nextLine();
 
         if(skillOption == 1){
-            teachPokemonSkill(pokemon, input);
+            teachPokemonSkill(pokemon[(pokemon.length-1)], input);
         }
 
         return pokemon;
     }
 
 
-    public static void viewPokemon(Pokemon[] pokemon){
-        System.out.println(pokemon[0]);
+    public static void viewPokemon(Pokemon[] pokemon){      //Displays all created Pokemon
+        for(int i = 0; i < pokemon.length; i++){
+            System.out.println(pokemon[i]);
+        }
     }
 
     
-    public static void teachPokemonSkill(Pokemon[] pokemon, Scanner input){
+    public static void teachPokemonSkill(Pokemon pokemon, Scanner input){     //Takes user input to create a skill
         String skillName;
         int ap;
         int ec;
@@ -100,7 +101,23 @@ public class Utility {
         ec = input.nextInt();
         input.nextLine();
 
-        pokemon[0].learnSkill(skillName, ap, ec);
+        pokemon.learnSkill(skillName, ap, ec);
+
+
+    }
+
+    public static Pokemon[] arrayAdd(Pokemon[] pokemon, Pokemon pokemonToAdd){      //Makes it so you can add another element to an array, but that array must start at length 0
+        Pokemon[] pokemonTemp = new Pokemon[(pokemon.length+1)];
+
+        for(int i = 0; i < pokemonTemp.length; i++){
+            
+            if(i < pokemon.length){pokemonTemp[i] = pokemon[i];}
+
+            else{pokemonTemp[i] = pokemonToAdd;}
+        }
+
+        pokemon = pokemonTemp;
+        return pokemon;
 
 
     }
