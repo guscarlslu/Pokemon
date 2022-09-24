@@ -70,6 +70,16 @@ public class Pokemon{
         return currentSkill.getEc();
     }
 
+    public boolean assertSkillNull(){
+        if (this.currentSkill == null){
+            return true;
+        }
+
+        else{
+            return false;
+        }
+    }
+
     public String toString(){   //Makes it so you can print the information in a Pokemon object
         String returnString;
 
