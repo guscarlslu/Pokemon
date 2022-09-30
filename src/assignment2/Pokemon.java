@@ -68,6 +68,8 @@ public class Pokemon{
 
     public int getMAX_HP(){return this.maxHp;}
 
+
+    //pung
     public String getCurrentSkillName(){
         return currentSkill.getName();
     }
