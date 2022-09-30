@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Utility {
@@ -7,13 +8,14 @@ public class Utility {
         int menuoption = 0;
         Pokemon[] pokemon = new Pokemon[0];
 
-        while(menuoption != 4){
+        while(menuoption != 6){
 
             System.out.println("----------------------------------");
             System.out.println("1. Create a Pokemon");
             System.out.println("2. View Pokemon");
             System.out.println("3. Battle");
-            System.out.println("4. Exit");
+            System.out.println("4. Manage items");
+            System.out.println("6. Exit");
 
             menuoption = input.nextInt();
             input.nextLine();
@@ -24,7 +26,11 @@ public class Utility {
 
             else if(menuoption == 3){}
 
-            else if(menuoption == 4){System.out.println("Thank you for playing Pokemon!");}
+            else if(menuoption == 4){
+                ItemManager.itemMenu(input);
+            }
+
+            else if(menuoption == 6){System.out.println("Thank you for playing Pokemon!");}
 
             else{System.out.println("Error - Type a number from 1 to 4");}
         }
@@ -162,6 +168,49 @@ public class Utility {
 
 
     }
+
+
+
+
+    public static void createSack(Scanner input) {  //allows user to create ItemSack
+        ArrayList<Item> Items = new ArrayList<>();
+
+        String itemName;
+        int healPower;
+        double itemWeight;
+
+        int itemMenu = 1;
+        while (itemMenu != 0) {
+
+
+            System.out.println("----------------------------------");
+            System.out.println("Type the name of the item");
+            itemName = input.nextLine();
+
+            System.out.println("----------------------------------");
+            System.out.println("How much should the item heal?");
+            healPower = input.nextInt();
+            input.nextLine();
+
+            System.out.println("----------------------------------");
+            System.out.println("Type the weight of the item");
+            itemWeight = input.nextDouble();
+
+
+            Items.add(new Item(itemName, healPower, itemWeight));
+
+            System.out.println("Press 1 to create a new item \n Press 0 to continue");
+            itemMenu = input.nextInt();
+            input.nextLine();
+
+
+            System.out.println("----------------------------------");
+
+        }
+
+
+    }
+
 
     
 }

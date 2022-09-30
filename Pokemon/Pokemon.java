@@ -53,7 +53,7 @@ public class Pokemon{
     }
 
     public void spendEp(int epSpent){   //Spending ep
-        if((this.ep - epSpent) => 0) {
+        if((this.ep - epSpent) >= 0) {
             this.ep -= epSpent;
         }
     }
@@ -62,11 +62,11 @@ public class Pokemon{
         return currentSkill.getName();
     }
 
-    public String getCurrentSkillAp(){
+    public int getCurrentSkillAp(){
         return currentSkill.getAp();
     }
 
-    public String getCurrentSkillEc(){
+    public int getCurrentSkillEc(){
         return currentSkill.getEc();
     }
 
