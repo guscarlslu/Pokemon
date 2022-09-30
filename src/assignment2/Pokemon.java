@@ -58,6 +58,16 @@ public class Pokemon{
         }
     }
     
+    public int getEnergy(){return this.ep;}
+
+    public int getCurrentHP(){return this.currentHp;}
+
+    public String getName(){return this.name;}
+
+    public String getType(){return this.name;}
+
+    public int getMAX_HP(){return this.maxHp;}
+
     public String getCurrentSkillName(){
         return currentSkill.getName();
     }
